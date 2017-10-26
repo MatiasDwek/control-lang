@@ -12,7 +12,7 @@ delim	[ \t\n]
 ws	{delim}+
 letter	[a-zA-Z]
 digit	[0-9]
-id	{letter}({letter}|{digit})*
+word	{letter}({letter}|{digit})*
 number	[-+]?{digit}+
 
 %%
@@ -39,10 +39,33 @@ number	[-+]?{digit}+
 \(	{return LPAREN;}
 \)	{return RPAREN;}
 \;	{return SEMICOL;}
+=	{return EQASS;}
+"or"	{return OR;}
+"and"	{return AND;}
+"=="	{return EQCOMP;}
+"!="	{return NE;}
+"<"	{return LT;}
+"<="	{return LE;}
+">"	{return GT;}
+">="	{return GE;}
+"+"	{return ADD;}
+"-"	{return SUB;}
+"*"	{return MUL;}
+"/"	{return DIV;}
+"%"	{return MOD;}
+"!"	{return OPP;}
+"inint"	{return ININT;}
+"mouseposx"	{return MOUSEPOSX;}
+"mouseposy"	{return MOUSEPOSY;}
+"instring"	{return INSTRING;}
+"string"	{return STRING_T;}
+"int"	{return INT_T;}
 
+\".*\"	{printf("hola"); return STRING;}
+{number}	{return INT;}
 
+{word}	{return ID;}
 
-{id}	{return ID;}
 
 #.*	//comments
 	
