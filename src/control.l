@@ -3,11 +3,15 @@
 #include <string.h>
 
 #include "control.h"
+//#include "y.tab.h"
 
 %}
 %%
-[a-zA-Z] ECHO;
-
+[0-9]+	{
+		//yylval.value = atoi(yytext);
+		return INTEGER;
+	}
+	
 %%
 
 int yywrap(void) {
