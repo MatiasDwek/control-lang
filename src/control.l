@@ -9,7 +9,7 @@
 %%
 [0-9]+	{
 		//yylval.value = atoi(yytext);
-		return INTEGER;
+		return INTT;
 	}
 	
 %%

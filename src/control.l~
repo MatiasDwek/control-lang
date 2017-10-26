@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 
-//#include "control.h"
+#include "control.h"
 //#include "y.tab.h"
 
 %}
 %%
 [0-9]+	{
 		//yylval.value = atoi(yytext);
-		return INTEGER;
+		return INTT;
 	}
 	
 %%

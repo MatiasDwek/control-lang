@@ -738,7 +738,7 @@ YY_RULE_SETUP
 #line 10 "control.l"
 {
 		//yylval.value = atoi(yytext);
-		return INTEGER;
+		return INTT;
 	}
 	YY_BREAK
 case 2:
