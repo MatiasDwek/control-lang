@@ -1,0 +1,42 @@
+<statement> ::=	"{" <statement> "}" |
+				"while" "(" <expression> ")" "{" <statement> "}" | 
+				"if" "(" <expression> ")" "{" <statement> "}" | 
+				"if" "(" <expression> ")" "else" "{"<statement>"}" | 
+				"repeat" "(" <expression> ")" "{"<statement>"}" |
+				<definition> ";" |
+				<expression> ";" |
+				<assignment> ";" |
+				"pause" "reint" ";" |
+				"outstring" <restring> ";" |
+				"outint" <reint> ";" |
+				"lclick" ";" |
+				"rclick" ";" |
+				"lrelease" ";" |
+				"rrlease" ";" |
+				"up" <retint> ";" | 
+				"down" <retint> ";" |
+				"left" <retint> ";" |
+				"right" <retint> ";" |
+				"presskey" <restring> ";" |
+				"releasekey" <restring> ";"
+<definition> ::=	<type> "id" | <type> <assignment>
+<assignment> ::=	"id" "=" <reint> | "id" "=" <fuint> |
+					"id" "=" <restring> | "id" "=" <fustring>
+<type> ::=	"type_int" | "type_string"
+<expression> ::=	<conjunction> | <expression> "or" <conjunction>
+<conjunction> ::=	<equality> | <conjunction> "and" <equality>
+<equality> ::=	<relation> | <relation> <equop> <relation>
+<equop> ::=	"==" | "!="
+<relation> ::= <addition> | <addition> <relop> <addition>
+<relop> ::= "<" | "<=" | ">" | ">="
+<addition> ::= <term> | <addition> <addop> <term>
+<addop> ::= "+" | "-"
+<term> ::= <factor> | <term> <mulop> <factor> 
+<mulop> ::= "*" | "/" | "%"
+<factor> ::= <unaryop> <primary> | <primary>
+<unaryop> ::= "-" | "!"
+<primary> ::= "id" | "int" | "(" <expression> ")"
+<fuint> ::= "inint" | "mouseposx" | "mouseposy"
+<fustring> ::= "instring"
+<retint> ::= <expression> | "id" | "int"
+<restring> ::= "string" | "id"
