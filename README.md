@@ -4,7 +4,7 @@ Este proyecto consiste en el lenguaje de programación **control** para manejar 
 
 
 
-Instrucciones:
+#### Instrucciones:
 
 + Acceder al directorio `/src`
 
@@ -12,3 +12,11 @@ Instrucciones:
 + Compilar el proyecto a partir del comando `make`
 + Ejecutar el programa con el comando `./control`
 + Si se desean eliminar los archivos creados, utilizar la instrucción `make clean`
+
+
+
+#### Referencias:
+
++ Aho, Alfred V., Ravi Sethi, and Jeffrey D. Ullman. *Compilers: principles, techniques, and tools*. Vol. 2. Reading: Addison-Wesley, 2007.
++ Martina Fletcher, Syntax and Semantics Structure of programming languages, http://slideplayer.com/slide/8616422/
++ ePaperPress, Yacc Practice, Part I, http://epaperpress.com/lexandyacc/pry1.html
