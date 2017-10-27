@@ -10,7 +10,7 @@ typedef enum {	WHILE, LPAREN, RPAREN, LCURLY, RCURLY, IF, ELSE,
 		INSTRING, STRING, STRING_T, INT_T
 	     } TERMINALS;
 	     
-//typedef enum {TODO_} NON_TERMINALS;
+typedef enum {DOTO_} NON_TERMINALS;
 
 
 
