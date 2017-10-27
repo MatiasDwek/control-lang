@@ -1,3 +1,5 @@
 Para citar como referencia: http://slideplayer.com/slide/8616422/
 Pagina con buena info: http://epaperpress.com/lexandyacc/pry1.html
 Funciones: http://slideplayer.com/slide/7893083/25/images/15/Chapter+3+Context-free+Grammar.jpg
+Makefile: http://disi.unitn.it/~abeni/RTOS/2011/makefiles.pdf
+InstallID: https://books.google.com.ar/books?id=kPIJaNyk404C&pg=PA248&lpg=PA248&dq=%22installid%22+compiler&source=bl&ots=GR5lIH4d6C&sig=VsCeFPVKqtPTE5sz1A5S28-6Gkc&hl=en&sa=X&redir_esc=y#v=onepage&q=%22installid%22%20compiler&f=true
