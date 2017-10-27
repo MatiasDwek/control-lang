@@ -1,0 +1,12 @@
+CC = gcc
+
+all: control
+
+control: lex.yy.c
+	$(CC) lex.yy.c -o control -lfl
+
+lex.yy.c: control.l
+	lex control.l
+	
+clean:
+	rm -rf *~ control.c lex.yy.c control
