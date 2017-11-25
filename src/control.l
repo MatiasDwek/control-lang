@@ -1,8 +1,8 @@
 %{
 #include <stdio.h>
-#include <string.h>
+#include <cstring>
 
-#include "control.h"
+#include "symbol.hpp"
 //#include "y.tab.h"
 
 %}
@@ -18,54 +18,54 @@ number	[-+]?{digit}+
 %%
 {ws}	{/* no action and no return */}
 #.*	{/* comments, no action and no return */}
-"if"	{return IF;}
-"else"	{return ELSE;}
-"while"	{return WHILE;}
-"pause" {return PAUSE;}
-"repeat"	{return REPEAT;}
-"outstring"	{return OUTSTRING;}
-"outint"	{return OUTINT;}
-"lclick"	{return LCLICK;}
-"rclick"	{return RCLICK;}
-"lrelease"	{return LRELEASE;} 
-"rrelease"	{return RRLEASE;} 
-"up"	{return UP;} 
-"down"	{return DOWN;}
-"left"	{return LEFT;} 
-"right"	{return RIGHT;} 
-"presskey"	{return PRESSKEY;}
-"releasekey"	{return RELEASEKEY;}
-\{	{return LCURLY;}
-\}	{return RCURLY;}
-\(	{return LPAREN;}
-\)	{return RPAREN;}
-\;	{return SEMICOL;}
-=	{return EQASS;}
-"or"	{return OR;}
-"and"	{return AND;}
-"=="	{return EQCOMP;}
-"!="	{return NE;}
-"<"	{return LT;}
-"<="	{return LE;}
-">"	{return GT;}
-">="	{return GE;}
-"+"	{return ADD;}
-"-"	{return SUB;}
-"*"	{return MUL;}
-"/"	{return DIV;}
-"%"	{return MOD;}
-"!"	{return OPP;}
-"inint"	{return ININT;}
-"mouseposx"	{return MOUSEPOSX;}
-"mouseposy"	{return MOUSEPOSY;}
-"instring"	{return INSTRING;}
-"string"	{return STRING_T;}
-"int"	{return INT_T;}
+"if"	{return (int) SymbolID::IF;}
+"else"	{return (int) SymbolID::ELSE;}
+"while"	{return (int) SymbolID::WHILE;}
+"pause" {return (int) SymbolID::PAUSE;}
+"repeat"	{return (int) SymbolID::REPEAT;}
+"outstring"	{return (int) SymbolID::OUTSTRING;}
+"outint"	{return (int) SymbolID::OUTINT;}
+"lclick"	{return (int) SymbolID::LCLICK;}
+"rclick"	{return (int) SymbolID::RCLICK;}
+"lrelease"	{return (int) SymbolID::LRELEASE;} 
+"rrelease"	{return (int) SymbolID::RRLEASE;} 
+"up"	{return (int) SymbolID::UP;} 
+"down"	{return (int) SymbolID::DOWN;}
+"left"	{return (int) SymbolID::LEFT;} 
+"right"	{return (int) SymbolID::RIGHT;} 
+"presskey"	{return (int) SymbolID::PRESSKEY;}
+"releasekey"	{return (int) SymbolID::RELEASEKEY;}
+\{	{return (int) SymbolID::LCURLY;}
+\}	{return (int) SymbolID::RCURLY;}
+\(	{return (int) SymbolID::LPAREN;}
+\)	{return (int) SymbolID::RPAREN;}
+\;	{return (int) SymbolID::SEMICOL;}
+=	{return (int) SymbolID::EQASS;}
+"or"	{return (int) SymbolID::OR;}
+"and"	{return (int) SymbolID::AND;}
+"=="	{return (int) SymbolID::EQCOMP;}
+"!="	{return (int) SymbolID::NE;}
+"<"	{return (int) SymbolID::LT;}
+"<="	{return (int) SymbolID::LE;}
+">"	{return (int) SymbolID::GT;}
+">="	{return (int) SymbolID::GE;}
+"+"	{return (int) SymbolID::ADD;}
+"-"	{return (int) SymbolID::SUB;}
+"*"	{return (int) SymbolID::MUL;}
+"/"	{return (int) SymbolID::DIV;}
+"%"	{return (int) SymbolID::MOD;}
+"!"	{return (int) SymbolID::OPP;}
+"inint"	{return (int) SymbolID::ININT;}
+"mouseposx"	{return (int) SymbolID::MOUSEPOSX;}
+"mouseposy"	{return (int) SymbolID::MOUSEPOSY;}
+"instring"	{return (int) SymbolID::INSTRING;}
+"string"	{return (int) SymbolID::STRING_T;}
+"int"	{return (int) SymbolID::INT_T;}
 
-\".*\"	{return STRING;}
-{number}	{return INT;}
+\".*\"	{return (int) SymbolID::STRING;}
+{number}	{return (int) SymbolID::INT;}
 
-{word}	{return ID;}
+{word}	{return (int) SymbolID::ID;}
 	
 %%
 
