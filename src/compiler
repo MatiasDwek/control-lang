@@ -1,0 +1,5 @@
+lex control.l
+yacc -dtv control.y
+g++ -c lex.yy.c
+g++ -c y.tab.c
+g++ -o control y.tab.o lex.yy.o

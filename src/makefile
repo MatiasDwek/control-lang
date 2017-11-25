@@ -2,8 +2,11 @@ CC = g++ -std=c++11
 
 all: control
 
-control: lex.yy.c
-	$(CC) lex.yy.c -o control -lfl
+control: lex.yy.c y.tab.c y.tab.o lex.yy.o
+	$(CC) -c lex.yy.c y.tab.c -o control y.tab.o lex.yy.o -lfl
+	
+y.tab.c: control.y
+	yacc -dtv control.y
 
 lex.yy.c: control.l
 	lex control.l
