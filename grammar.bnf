@@ -6,7 +6,7 @@
 				<definition> ";" |
 				<expression> ";" |
 				<assignment> ";" |
-				"pause" "reint" ";" |
+				"pause" <reint> ";" |
 				"outstring" <restring> ";" |
 				"outint" <reint> ";" |
 				"lclick" ";" |

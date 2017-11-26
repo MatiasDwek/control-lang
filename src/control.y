@@ -33,11 +33,114 @@ inline void yyerror(const char *s)
 
 // Translation rules
 
-statement: LCURLY statement RCURLY {std::cout << $$ << $3 << std::endl;}
-	 | LCURLY RCLICK {std::cout << $$ << std::endl;}
-	 | LCLICK {std::cout << $1 << std::endl;}
-	 | INT statement {$$ = $1;}
+statement : LCURLY statement RCURLY
+	  | WHILE LPAREN expression RPAREN LCURLY statement RCURLY
+	  | IF LPAREN expression RPAREN LCURLY statement RCURLY
+	  | IF LPAREN expression RPAREN ELSE LCURLY statement RCURLY
+	  | REPEAT LPAREN expression RPAREN LCURLY statement RCURLY
+	  | definition SEMICOL
+	  | expression SEMICOL
+	  | assignment SEMICOL
+	  | PAUSE reint SEMICOL
+	  | OUTSTRING restring SEMICOL
+	  | OUTINT reint SEMICOL
+	  | LCLICK SEMICOL
+	  | RCLICK SEMICOL
+	  | LRELEASE SEMICOL
+	  | RRELEASE SEMICOL
+	  | UP retint SEMICOL
+	  | DOWN retint SEMICOL
+	  | LEFT retint SEMICOL
+	  | RIGHT retint SEMICOL
+	  | PRESSKEY restring SEMICOL
+	  | RELEASEKEY restring SEMICOL
+	  ;
+	  
+definition : type ID
+	   | type assignment
+	   ;
+
+assignment : ID EQASS reint 
+	   | ID EQASS fuint
+	   | ID EQASS restring
+	   | ID EQASS fustring
+	   ;
+	   
+type : INT_T
+     | STRING_T
+     ;
+     
+expression : conjunction
+	   | expression OR conjunction
+	   ;
+	   
+conjunction : equality 
+	    | conjunction AND equality
+	    ;
+	   
+equality : relation
+	 | relation equop relation
 	 ;
+	 
+equop : EQCOMP
+      | NE
+      ;
+      
+relation : addition
+	 | addition relop addition
+	 ;
+	 
+relop : LT
+      | LE
+      | GT
+      | GE
+      ;
+      
+addition : term
+	 | addition addop term
+	 ;
+	 
+addop : ADD
+      | SUB
+      ;
+  
+term : factor
+     | term mulop factor
+     ;
+      
+mulop : MUL
+      | DIV
+      | MOD
+      ;
+      
+factor : unaryop primary
+       | primary;
+       
+unaryop : SUB
+        | OPP;
+        
+primary : ID
+        | INT
+        | LPAREN expression RPAREN
+        ;
+        
+fuint : INSTRING
+      | MOUSEPOSX
+      | MOUSEPOSY
+      ;
+      
+fustring : INSTRING
+         ;
+         
+retint : expression
+       | ID
+       | INT_T
+       ;
+       
+restring : STRING 
+	 | ID
+	 ;
+
  /*
 list: stmt
     | list stmt
