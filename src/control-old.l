@@ -29,16 +29,18 @@ static TreeNode *root;
     RCLICK LRELEASE RRELEASE UP DOWN LEFT RIGHT
     PRESSKEY RELEASEKEY EQASS OR AND EQCOMP NE LT
     LE GT GE ADD SUB MUL DIV MOD OPP ININT MOUSEPOSX 
-    MOUSEPOSY INSTRING STRING_T INT_T 
+    MOUSEPOSY INSTRING STRING_T INT_T
     
-%type<node> file statement definition equop relop addop mulop unaryop 
-	    fuint fustring type restring assignment
-	    addition term factor primary reint
-	    expression conjunction equality relation
-	    
 %token<i> INT
-
 %token<s> ID STRING
+
+%type<node> file statement definition 
+	    fuint fustring
+	    
+%type<i> expression conjunction equality relation
+	 addition term factor primary reint
+	 
+%type<s> equop relop addop mulop unaryop type restring assignment
 	    
 %start file
 
@@ -83,7 +85,7 @@ statement : statement statement
 	  | REPEAT LPAREN expression RPAREN LCURLY statement RCURLY
 	  | definition SEMICOL
 	{
-		/*Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
+		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
 		$$ = new TreeNode(statement);
 		
 		Symbol integ(SymbolID::int_, SymbolType::terminal_, std::to_string($1));
@@ -93,11 +95,11 @@ statement : statement statement
 		TreeNode* node2 = new TreeNode(semicol);
 		
 		$$->addNode(*node1);
-		$$->addNode(*node2);*/
+		$$->addNode(*node2);
 	}
 	  | expression SEMICOL
 	{
-		/*Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
+		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
 		$$ = new TreeNode(statement);
 		
 		Symbol integ(SymbolID::int_, SymbolType::terminal_, std::to_string($1));
@@ -109,7 +111,7 @@ statement : statement statement
 		$$->addNode(*node1);
 		$$->addNode(*node2);
 		
-		//std::cout << $1 << std::endl;*/
+		//std::cout << $1 << std::endl;
 	}
 	  | assignment SEMICOL { ; }
 	  | PAUSE reint SEMICOL
@@ -142,17 +144,54 @@ statement : statement statement
 	  
 definition : type ID
 	{
-
+		if (*$1 == "int")
+		{
+			vars[*$2];
+			vars_types[*$2] = VariableType::var_int;
+		}
+		else if (*$1 == "string")
+		{
+			vars[*$2];
+			vars_types[*$2] = VariableType::var_string;
+		}
+		
+		delete $1;
+		delete $2;
 	}
 	   | type assignment
 	{
-
+		if (*$1 == "int") 
+		{
+			if (vars_types.at(*$1) != VariableType::var_int)
+				yyerror("Mismatched variables types.");
+		}
+		else if (*$1 == "string")
+		{
+			if (vars_types.at(*$1) != VariableType::var_string)
+				yyerror("Mismatched variables types.");
+		}
+		
+		delete $1;
+		delete $2;
 	}
 	   ;
 
 assignment : ID EQASS reint
 	{
-
+		static std::map<std::string, std::string>::iterator it_vars;
+		
+		it_vars = vars.find(*$1);
+   		if (it_vars != vars.end())
+   			yyerror("Variable already defined.");
+   		else
+   		{
+   			vars[*$1] = std::to_string($3);
+   			vars_types[*$1] = VariableType::var_int;
+   			
+   			$$ = new std::string(*$1);
+   			
+   			delete $1;
+   		}
 	}
 	   | ID EQASS fuint
 	{
@@ -160,7 +199,20 @@ assignment : ID EQASS reint
 	}
 	   | ID EQASS restring
 	{
-
+		static std::map<std::string, std::string>::iterator it_vars;
+		
+		it_vars = vars.find(*$1);
+   		if (it_vars != vars.end())
+   			yyerror("Variable already defined.");
+   		else
+   		{
+   			vars[*$1] = *$3;
+   			vars_types[*$1] = VariableType::var_string;
+   			
+   			$$ = new std::string(*$1);
+   			
+   			delete $1;
+   		}
 	}
 	   | ID EQASS fustring
 	{
@@ -170,157 +222,195 @@ assignment : ID EQASS reint
 	   
 type : INT_T
 	{
-
+		$$ = new std::string("int");
 	}
      | STRING_T
 	{
-
+		$$ = new std::string("string");
 	}
      ;
      
 expression : conjunction
 	{
-
+		$$ = $1;
 	}
 	   | expression OR conjunction
 	{
-
+		$$ = $1 || $3;
 	}
 	   ;
 	   
 conjunction : equality 
 	{
-
+		$$ = $1;
 	}
 	    | conjunction AND equality
 	{
-
+		$$ = $1 && $3;
 	}
 	    ;
 	   
 equality : relation
 	{
-
+		$$ = $1;
 	}
 	 | relation equop relation
 	{
-
+		if (*$2 == "==")
+			$$ = $1 == $3;
+		else if (*$2 == "!=")
+			$$ = $1 != $3;
+		delete $2;
 	}
 	 ;
 	 
 equop : EQCOMP
 	{
-
+		$$ = new std::string("==");
 	}
       | NE
 	{
-
+		$$ = new std::string("!=");
 	}
       ;
       
 relation : addition
 	{
-
+		$$ = $1;
 	}
 	 | addition relop addition
 	{
-
+		if (*$2 == "<")
+			$$ = $1 < $3;
+		else if (*$2 == "<=")
+			$$ = $1 <= $3;
+		else if (*$2 == ">")
+			$$ = $1 > $3;
+		else if (*$2 == ">=")
+			$$ = $1 >= $3;
+		delete $2;
 	}
 	 ;
 	 
 relop : LT
 	{
-
+		$$ = new std::string("<");
 	}
       | LE
 	{
-
+		$$ = new std::string("<=");
 	}
       | GT
 	{
-
+		$$ = new std::string(">");
 	}
       | GE
 	{
-
+		$$ = new std::string(">=");
 	}
       ;
       
 addition : term
 	{
-
+		$$ = $1;
 	}
 	 | addition addop term
 	{
-
+		if (*$2 == "+")
+			$$ = $1 + $3;
+		else if (*$2 == "-")
+			$$ = $1 - $3;
+		delete $2;
 	}
 	 ;
 	 
 addop : ADD
 	{
-
+		$$ = new std::string("+");
 	}
       | SUB
 	{
-
+		$$ = new std::string("-");
 	}
       ;
   
 term : factor
 	{
-
+		$$ = $1;
 	}
      | term mulop factor
 	{
-
+		if (*$2 == "*")
+			$$ = $1 * $3;
+		else if (*$2 == "/")
+			$$ = $1 / $3;
+		else if (*$2 == "%")
+			$$ = $1 % $3;
+		delete $2;
 	}
      ;
       
 mulop : MUL
 	{
-
+		$$ = new std::string("*");
 	}
       | DIV
 	{
-
+		$$ = new std::string("/");
 	}
       | MOD
 	{
-
+		$$ = new std::string("%");
 	}
       ;
       
 factor : unaryop primary
 	{
-
+		if (*$1 == "-")
+			$$ = -$2;
+		else if (*$1 == "!")
+			$$ = !$2;
+		delete $1;
 	}
        | primary
 	{
-
+		$$ = $1;
 	}
        ;
        
 unaryop : SUB
 	{
-
+		$$ = new std::string("-");
 	}
         | OPP
 	{
-
+		$$ = new std::string("!");
 	}
         ;
 
 primary : ID
 	{
-
+		static std::map<std::string, std::string>::iterator it_vars;
+		
+		it_vars = vars.find(*$1);
+   		if (it_vars == vars.end())
+   			yyerror("Undefined variable.");
+   		else
+   		{
+   			if (vars_types[*$1] != VariableType::var_int)
+				yyerror("Mismatched variables types.");
+			else
+				$$ = std::stoi((vars[*$1]), NULL, 10);
+   		}
+   		delete $1;
 	}
         | INT
 	{
-
+		$$ = $1;
 	}
         | LPAREN expression RPAREN
 	{
-
+		$$ = $2;
 	}
         ;
         
@@ -346,24 +436,28 @@ fustring : INSTRING
          
 reint : expression
 	{
-
+		$$ = $1;
 	}
        ;
        
-restring : STRING
+restring : STRING 
 	{
-		Symbol restring(SymbolID::restring_, SymbolType::non_terminal_);
-		$$ = new TreeNode(restring);
-		
-		Symbol string_s(SymbolID::string_, SymbolType::non_terminal_, *$1);
-		
-		TreeNode string_n(string_s);
-		
-		$$->addNode(string_n);
+		$$ = $1;
 	}
 	 | ID
 	{
-
+		static std::map<std::string, std::string>::iterator it_vars;
+		
+		it_vars = vars.find(*$1);
+   		if (it_vars == vars.end())
+   			yyerror("Undefined variable.");
+   		else
+   		{
+   			if (vars_types[*$1] != VariableType::var_string)
+				yyerror("Mismatched variables types.");
+			else
+				$$ = new std::string(vars[*$1]);
+   		}
 	}
 	 ;
 

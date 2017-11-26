@@ -1,1 +1,3 @@
 - que hacer con la division por cero
+- que hacemos con la scope? (ver p.85 del dragon en adelante)
+- error handling (yyerror para ver donde se tendria que arreglar)

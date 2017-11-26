@@ -1,5 +1,5 @@
-#ifndef _CONTROL_TREE_HPP_
-#define _CONTROL_TREE_HPP_
+#ifndef _SYMBOLTYPE_HPP_
+#define _SYMBOLTYPE_HPP_
 
 #include <string>
 
