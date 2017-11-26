@@ -18,7 +18,7 @@ std::vector<Symbol> TreeNode::DFSPreOrder()
     std::vector<Symbol> terminals_vector;
     Symbol node_symbol = this->getSymbol();
 
-    if (node_symbol.symbol_type == SymbolType::TERMINAL)
+    if (node_symbol.symbol_type == SymbolType::terminal_)
         terminals_vector.insert(terminals_vector.begin(), node_symbol);
     else
     {
@@ -32,7 +32,7 @@ std::vector<Symbol> TreeNode::DFSPreOrder()
 void TreeNode::DFSPreOrder(std::vector<Symbol>& terminals_vector)
 {
     Symbol node_symbol = this->getSymbol();
-    if (node_symbol.symbol_type == SymbolType::TERMINAL)
+    if (node_symbol.symbol_type == SymbolType::terminal_)
         terminals_vector.insert(terminals_vector.end(), node_symbol);
     else
     {

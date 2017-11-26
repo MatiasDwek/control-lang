@@ -1,5 +1,6 @@
 #include <vector>
 
+#include "symbol.hpp"
 #include "treenode.hpp"
 
 TreeNode::TreeNode(const Symbol& symbol_) : symbol(symbol_)

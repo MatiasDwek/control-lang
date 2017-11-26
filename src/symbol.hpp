@@ -6,17 +6,23 @@
 
 enum class SymbolID
 {
-    WHILE, LPAREN, RPAREN, LCURLY, RCURLY, IF, ELSE,
-    REPEAT, SEMICOL, PAUSE, OUTSTRING, OUTINT, LCLICK, RCLICK,
-    LRELEASE, RRLEASE, UP, DOWN, LEFT, RIGHT, PRESSKEY, RELEASEKEY,
-    ID, EQASS, OR, AND, EQCOMP, NE, LT, LE, GT, GE, ADD, SUB,
-    MUL, DIV, MOD, OPP, INT, ININT, MOUSEPOSX, MOUSEPOSY,
-    INSTRING, STRING, STRING_T, INT_T
+    // Terminals
+    while_, lparen_, rparen_, lcurly_, rcurly_, if_, else_,
+    repeat_, semicol_, pause_, outstring_, outint_, lclick_, rclick_,
+    lrelease_, rrlease_, up_, down_, left_, right_, presskey_, releasekey_,
+    id_, eqass_, or_, and_, eqcomp_, ne_, lt_, le_, gt_, ge_, add_, sub_,
+    mul_, div_, mod_, opp_, int_, inint_, mouseposx_, mouseposy_,
+    instring_, string_, string_t_, int_t_,
+    
+    // Non terminals
+    file_, statement_, definition_, assignment_,
+    type_, expression_, conjunction_, equality_, equop_, relation_, relop_, addition_,
+    addop_, term_, mulop_, factor_, unaryop_, primary_, fuint_, fustring_, reint_, restring_
 };
 
 enum class SymbolType
 {
-    TERMINAL, NON_TERMINAL
+    terminal_, non_terminal_
 };
 
 class Symbol

@@ -13,9 +13,11 @@ inline void yyerror(const char *s)
 {
 	std::cout << s << std::endl;
 }
+
+static TreeNode *root;
 %}
  
-%union{int i; std::string *s; TreeNode* node;}
+%union{int i; std::string *s; TreeNode *node;}
  
 %token<node> WHILE LPAREN RPAREN LCURLY RCURLY IF ELSE
     REPEAT SEMICOL PAUSE OUTSTRING OUTINT LCLICK
@@ -28,12 +30,37 @@ inline void yyerror(const char *s)
 %token<node> STRING
 %token<node> ID
 
+%type<node> file statement definition assignment type expression conjunction 
+	    equality equop relation relop addition addop term mulop factor
+	    unaryop primary fuint fustring reint restring
+
 %%
 
 
 // Translation rules
 
+file : statement
+	{
+		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
+		$1 = new TreeNode(statement);
+		root = $1;
+	}
+     ;
+
 statement : LCURLY statement RCURLY
+	{
+		Symbol lcurly(SymbolID::lcurly_, SymbolType::terminal_);
+		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
+		Symbol rcurly(SymbolID::rcurly_, SymbolType::terminal_);
+		
+		$1 = new TreeNode(lcurly);
+		$2 = new TreeNode(statement);
+		$3 = new TreeNode(rcurly);
+		
+		$$->addNode(*$1);
+		$$->addNode(*$2);
+		$$->addNode(*$3);
+	} 
 	  | WHILE LPAREN expression RPAREN LCURLY statement RCURLY
 	  | IF LPAREN expression RPAREN LCURLY statement RCURLY
 	  | IF LPAREN expression RPAREN ELSE LCURLY statement RCURLY

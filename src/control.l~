@@ -5,6 +5,8 @@
 #include <string>
 
 #include "y.tab.h"
+#include "treenode.hpp"
+
 
 %}
 /* Regular definitions */
