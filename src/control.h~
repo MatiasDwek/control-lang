@@ -1,7 +1,0 @@
-#ifndef _CONTROL_H_
-#define _CONTROL_H_
-
-static NODE *root;
-
-
-#endif
