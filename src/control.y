@@ -33,6 +33,8 @@ static TreeNode *root;
 %type<node> file statement definition assignment type expression conjunction 
 	    equality equop relation relop addition addop term mulop factor
 	    unaryop primary fuint fustring reint restring
+	    
+%start file
 
 %%
 
@@ -41,20 +43,19 @@ static TreeNode *root;
 
 file : statement
 	{
-		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
-		$1 = new TreeNode(statement);
 		root = $1;
 	}
      ;
 
 statement : LCURLY statement RCURLY
 	{
-		Symbol lcurly(SymbolID::lcurly_, SymbolType::terminal_);
 		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
+		$$ = new TreeNode(statement);
+		
+		Symbol lcurly(SymbolID::lcurly_, SymbolType::terminal_);
 		Symbol rcurly(SymbolID::rcurly_, SymbolType::terminal_);
 		
 		$1 = new TreeNode(lcurly);
-		$2 = new TreeNode(statement);
 		$3 = new TreeNode(rcurly);
 		
 		$$->addNode(*$1);
@@ -72,6 +73,19 @@ statement : LCURLY statement RCURLY
 	  | OUTSTRING restring SEMICOL
 	  | OUTINT reint SEMICOL
 	  | LCLICK SEMICOL
+	{
+		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
+		$$ = new TreeNode(statement);
+	
+		Symbol lclick(SymbolID::lclick_, SymbolType::terminal_);
+		Symbol semicol(SymbolID::semicol_, SymbolType::terminal_);
+		
+		$1 = new TreeNode(lclick);
+		$2 = new TreeNode(semicol);
+		
+		$$->addNode(*$1);
+		$$->addNode(*$2);
+	}
 	  | RCLICK SEMICOL
 	  | LRELEASE SEMICOL
 	  | RRELEASE SEMICOL
@@ -200,4 +214,13 @@ extern int yyparse();
 int main()
 {
 	yyparse();
+	
+	std::vector<Symbol> terminals_vector;
+	terminals_vector = root->DFSPreOrder();
+	
+	std::cout << "Parsed tree terminals:" << std::endl;
+	
+  	for (std::vector<Symbol>::iterator it = terminals_vector.begin() ; it != terminals_vector.end(); it++)
+    		std::cout << ' ' << (int) it->symbol_ID;
+  	std::cout << '\n';
 }
