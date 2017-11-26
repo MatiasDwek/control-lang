@@ -26,17 +26,17 @@ static TreeNode *root;
     LE GT GE ADD SUB MUL DIV MOD OPP ININT MOUSEPOSX 
     MOUSEPOSY INSTRING STRING_T INT_T
     
-%token<node> INT
+%token<i> INT
 %token<node> STRING
 %token<node> ID
 
-%type<node> file statement definition assignment type
+%type<node> file statement definition assignment 
 	    fuint fustring reint restring
 	    
 %type<i> expression conjunction equality relation
 	 addition term factor primary
 	 
-%type<s> equop relop addop mulop unaryop
+%type<s> equop relop addop mulop unaryop type
 	    
 %start file
 
@@ -51,7 +51,16 @@ file : statement
 	}
      ;
 
-statement : LCURLY statement RCURLY
+statement : statement statement
+	{
+		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
+		
+		$$ = new TreeNode(statement);
+		
+		$$->addNode(*$1);
+		$$->addNode(*$2);
+	}
+	  | LCURLY statement RCURLY
 	{
 		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
 		$$ = new TreeNode(statement);
@@ -73,7 +82,19 @@ statement : LCURLY statement RCURLY
 	  | definition SEMICOL
 	  | expression SEMICOL
 	{
-		;
+		Symbol statement(SymbolID::statement_, SymbolType::non_terminal_);
+		$$ = new TreeNode(statement);
+		
+		Symbol integ(SymbolID::int_, SymbolType::terminal_, std::to_string($1));
+		Symbol semicol(SymbolID::semicol_, SymbolType::terminal_);
+		
+		TreeNode* node1 = new TreeNode(integ);
+		TreeNode* node2 = new TreeNode(semicol);
+		
+		$$->addNode(*node1);
+		$$->addNode(*node2);
+		
+		std::cout << $1 << std::endl;
 	}
 	  | assignment SEMICOL
 	  | PAUSE reint SEMICOL
@@ -134,157 +155,184 @@ assignment : ID EQASS reint
 	   
 type : INT_T
 	{
-		;
+		$$ = new std::string("int");
 	}
      | STRING_T
 	{
-		;
+		$$ = new std::string("string");
 	}
      ;
      
 expression : conjunction
 	{
-		;
+		$$ = $1;
 	}
 	   | expression OR conjunction
 	{
-		;
+		$$ = $1 || $3;
 	}
 	   ;
 	   
 conjunction : equality 
 	{
-		;
+		$$ = $1;
 	}
 	    | conjunction AND equality
 	{
-		;
+		$$ = $1 && $3;
 	}
 	    ;
 	   
 equality : relation
 	{
-		;
+		$$ = $1;
 	}
 	 | relation equop relation
 	{
-		;
+		if (*$2 == "==")
+			$$ = $1 == $3;
+		else if (*$2 == "!=")
+			$$ = $1 != $3;
+		delete $2;
 	}
 	 ;
 	 
 equop : EQCOMP
 	{
-		;
+		$$ = new std::string("==");
 	}
       | NE
 	{
-		;
+		$$ = new std::string("!=");
 	}
       ;
       
 relation : addition
 	{
-		;
+		$$ = $1;
 	}
 	 | addition relop addition
 	{
-		;
+		if (*$2 == "<")
+			$$ = $1 < $3;
+		else if (*$2 == "<=")
+			$$ = $1 <= $3;
+		else if (*$2 == ">")
+			$$ = $1 > $3;
+		else if (*$2 == ">=")
+			$$ = $1 >= $3;
+		delete $2;
 	}
 	 ;
 	 
 relop : LT
 	{
-		;
+		$$ = new std::string("<");
 	}
       | LE
 	{
-		;
+		$$ = new std::string("<=");
 	}
       | GT
 	{
-		;
+		$$ = new std::string(">");
 	}
       | GE
 	{
-		;
+		$$ = new std::string(">=");
 	}
       ;
       
 addition : term
 	{
-		;
+		$$ = $1;
 	}
 	 | addition addop term
 	{
-		;
+		if (*$2 == "+")
+			$$ = $1 + $3;
+		else if (*$2 == "-")
+			$$ = $1 - $3;
+		delete $2;
 	}
 	 ;
 	 
 addop : ADD
 	{
-		;
+		$$ = new std::string("+");
 	}
       | SUB
 	{
-		;
+		$$ = new std::string("-");
 	}
       ;
   
 term : factor
 	{
-		;
+		$$ = $1;
 	}
      | term mulop factor
 	{
-		;
+		if (*$2 == "*")
+			$$ = $1 * $3;
+		else if (*$2 == "/")
+			$$ = $1 / $3;
+		else if (*$2 == "%")
+			$$ = $1 % $3;
+		delete $2;
 	}
      ;
       
 mulop : MUL
 	{
-		;
+		$$ = new std::string("*");
 	}
       | DIV
 	{
-		;
+		$$ = new std::string("/");
 	}
       | MOD
 	{
-		;
+		$$ = new std::string("%");
 	}
       ;
       
 factor : unaryop primary
 	{
-		;
+		if (*$1 == "-")
+			$$ = -$2;
+		else if (*$1 == "!")
+			$$ = !$2;
+		delete $1;
 	}
        | primary
 	{
-		;
+		$$ = $1;
 	}
        ;
        
 unaryop : SUB
 	{
-		;
+		$$ = new std::string("-");
 	}
         | OPP
 	{
-		;
+		$$ = new std::string("!");
 	}
         ;
         
 primary : ID
 	{
+		//$$ = vars[*$1];
 		;
 	}
         | INT
 	{
-		;
+		$$ = $1;
 	}
         | LPAREN expression RPAREN
 	{
-		;
+		$$ = $2;
 	}
         ;
         
