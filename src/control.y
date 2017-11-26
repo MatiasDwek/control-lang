@@ -4,6 +4,8 @@
 #include <string>
 #include <map>
 
+#include "treenode.hpp"
+
 extern int yylex();
 static std::map<std::string, int> vars;
 
@@ -13,18 +15,18 @@ inline void yyerror(const char *s)
 }
 %}
  
-%union{int i; std::string *s;}
+%union{int i; std::string *s; TreeNode* node;}
  
-%token<i> WHILE LPAREN RPAREN LCURLY RCURLY IF ELSE
+%token<node> WHILE LPAREN RPAREN LCURLY RCURLY IF ELSE
     REPEAT SEMICOL PAUSE OUTSTRING OUTINT LCLICK
     RCLICK LRELEASE RRELEASE UP DOWN LEFT RIGHT
     PRESSKEY RELEASEKEY EQASS OR AND EQCOMP NE LT
     LE GT GE ADD SUB MUL DIV MOD OPP ININT MOUSEPOSX 
     MOUSEPOSY INSTRING STRING_T INT_T
     
-%token<i> INT
-%token<s> STRING
-%token<s> ID
+%token<node> INT
+%token<node> STRING
+%token<node> ID
 
 %%
 
@@ -167,4 +169,8 @@ expr: INT               { $$ = $1; }
 
 extern int yylex();
 extern int yyparse();
-int main() { yyparse(); }
+
+int main()
+{
+	yyparse();
+}

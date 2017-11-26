@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "symbol.hpp"
+
 class TreeNode
 {
 private:

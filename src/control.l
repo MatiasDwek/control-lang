@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <string>
 
+#include "treenode.hpp"
 #include "y.tab.h"
 
 %}

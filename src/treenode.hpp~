@@ -1,6 +1,8 @@
 #ifndef _TREENODE_HPP_
 #define _TREENODE_HPP_
 
+#include <vector>
+
 class TreeNode
 {
 private:

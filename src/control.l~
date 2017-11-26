@@ -29,7 +29,7 @@ number	[-+]?{digit}+
 "lclick"	{return LCLICK;}
 "rclick"	{return RCLICK;}
 "lrelease"	{return LRELEASE;} 
-"rrelease"	{return RRLEASE;} 
+"rrelease"	{return RRELEASE;} 
 "up"	{return UP;} 
 "down"	{return DOWN;}
 "left"	{return LEFT;} 

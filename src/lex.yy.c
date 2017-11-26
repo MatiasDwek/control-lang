@@ -558,10 +558,11 @@ char *yytext;
 #include <cstdlib>
 #include <string>
 
+#include "treenode.hpp"
 #include "y.tab.h"
 
 /* Regular definitions */
-#line 565 "lex.yy.c"
+#line 566 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -748,9 +749,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 19 "control.l"
+#line 20 "control.l"
 
-#line 754 "lex.yy.c"
+#line 755 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -836,250 +837,250 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 20 "control.l"
+#line 21 "control.l"
 {/* no action and no return */}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 21 "control.l"
+#line 22 "control.l"
 {/* comments, no action and no return */}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 22 "control.l"
+#line 23 "control.l"
 {return IF;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 23 "control.l"
+#line 24 "control.l"
 {return ELSE;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 24 "control.l"
+#line 25 "control.l"
 {return WHILE;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 25 "control.l"
+#line 26 "control.l"
 {return PAUSE;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 26 "control.l"
+#line 27 "control.l"
 {return REPEAT;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 27 "control.l"
+#line 28 "control.l"
 {return OUTSTRING;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 28 "control.l"
+#line 29 "control.l"
 {return OUTINT;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 29 "control.l"
+#line 30 "control.l"
 {return LCLICK;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 30 "control.l"
+#line 31 "control.l"
 {return RCLICK;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 31 "control.l"
+#line 32 "control.l"
 {return LRELEASE;} 
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 32 "control.l"
+#line 33 "control.l"
 {return RRELEASE;} 
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 33 "control.l"
+#line 34 "control.l"
 {return UP;} 
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 34 "control.l"
+#line 35 "control.l"
 {return DOWN;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 35 "control.l"
+#line 36 "control.l"
 {return LEFT;} 
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 36 "control.l"
+#line 37 "control.l"
 {return RIGHT;} 
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 37 "control.l"
+#line 38 "control.l"
 {return PRESSKEY;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 38 "control.l"
+#line 39 "control.l"
 {return RELEASEKEY;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 39 "control.l"
+#line 40 "control.l"
 {return LCURLY;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 40 "control.l"
+#line 41 "control.l"
 {return RCURLY;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 41 "control.l"
+#line 42 "control.l"
 {return LPAREN;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 42 "control.l"
+#line 43 "control.l"
 {return RPAREN;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 43 "control.l"
+#line 44 "control.l"
 {return SEMICOL;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 44 "control.l"
+#line 45 "control.l"
 {return EQASS;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 45 "control.l"
+#line 46 "control.l"
 {return OR;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 46 "control.l"
+#line 47 "control.l"
 {return AND;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 47 "control.l"
+#line 48 "control.l"
 {return EQCOMP;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 48 "control.l"
+#line 49 "control.l"
 {return NE;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 49 "control.l"
+#line 50 "control.l"
 {return LT;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 50 "control.l"
+#line 51 "control.l"
 {return LE;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 51 "control.l"
+#line 52 "control.l"
 {return GT;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 52 "control.l"
+#line 53 "control.l"
 {return GE;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 53 "control.l"
+#line 54 "control.l"
 {return ADD;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 54 "control.l"
+#line 55 "control.l"
 {return SUB;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 55 "control.l"
+#line 56 "control.l"
 {return MUL;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 56 "control.l"
+#line 57 "control.l"
 {return DIV;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 57 "control.l"
+#line 58 "control.l"
 {return MOD;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 58 "control.l"
+#line 59 "control.l"
 {return OPP;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 59 "control.l"
+#line 60 "control.l"
 {return ININT;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 60 "control.l"
+#line 61 "control.l"
 {return MOUSEPOSX;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 61 "control.l"
+#line 62 "control.l"
 {return MOUSEPOSY;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 62 "control.l"
+#line 63 "control.l"
 {return INSTRING;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 63 "control.l"
+#line 64 "control.l"
 {return STRING_T;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 64 "control.l"
+#line 65 "control.l"
 {return INT_T;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 66 "control.l"
+#line 67 "control.l"
 {yylval.s = new std::string(yytext); return STRING;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 67 "control.l"
+#line 68 "control.l"
 {yylval.i = strtol(yytext, NULL, 10); return INT;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 69 "control.l"
+#line 70 "control.l"
 {yylval.s = new std::string(yytext); return ID;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 71 "control.l"
+#line 72 "control.l"
 ECHO;
 	YY_BREAK
-#line 1083 "lex.yy.c"
+#line 1084 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2077,7 +2078,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 71 "control.l"
+#line 72 "control.l"
 
 
 
