@@ -897,7 +897,7 @@ YY_RULE_SETUP
 case 13:
 YY_RULE_SETUP
 #line 32 "control.l"
-{return RRLEASE;} 
+{return RRELEASE;} 
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
@@ -1072,7 +1072,7 @@ YY_RULE_SETUP
 case 48:
 YY_RULE_SETUP
 #line 69 "control.l"
-{return ID;}
+{yylval.s = new std::string(yytext); return ID;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP

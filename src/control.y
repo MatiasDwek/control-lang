@@ -17,7 +17,7 @@ inline void yyerror(const char *s)
  
 %token<i> WHILE LPAREN RPAREN LCURLY RCURLY IF ELSE
     REPEAT SEMICOL PAUSE OUTSTRING OUTINT LCLICK
-    RCLICK LRELEASE RRLEASE UP DOWN LEFT RIGHT
+    RCLICK LRELEASE RRELEASE UP DOWN LEFT RIGHT
     PRESSKEY RELEASEKEY EQASS OR AND EQCOMP NE LT
     LE GT GE ADD SUB MUL DIV MOD OPP ININT MOUSEPOSX 
     MOUSEPOSY INSTRING STRING_T INT_T
@@ -26,8 +26,6 @@ inline void yyerror(const char *s)
 %token<s> STRING
 %token<s> ID
 
-%type<i> statement
- 
 %%
 
 
@@ -48,10 +46,10 @@ statement : LCURLY statement RCURLY
 	  | RCLICK SEMICOL
 	  | LRELEASE SEMICOL
 	  | RRELEASE SEMICOL
-	  | UP retint SEMICOL
-	  | DOWN retint SEMICOL
-	  | LEFT retint SEMICOL
-	  | RIGHT retint SEMICOL
+	  | UP reint SEMICOL
+	  | DOWN reint SEMICOL
+	  | LEFT reint SEMICOL
+	  | RIGHT reint SEMICOL
 	  | PRESSKEY restring SEMICOL
 	  | RELEASEKEY restring SEMICOL
 	  ;
@@ -132,7 +130,7 @@ fuint : INSTRING
 fustring : INSTRING
          ;
          
-retint : expression
+reint : expression
        | ID
        | INT_T
        ;

@@ -66,7 +66,7 @@ number	[-+]?{digit}+
 \".*\"	{yylval.s = new std::string(yytext); return STRING;}
 {number}	{yylval.i = strtol(yytext, NULL, 10); return INT;}
 
-{word}	{return ID;}
+{word}	{yylval.s = new std::string(yytext); return ID;}
 	
 %%
 
