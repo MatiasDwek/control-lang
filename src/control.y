@@ -30,9 +30,13 @@ static TreeNode *root;
 %token<node> STRING
 %token<node> ID
 
-%type<node> file statement definition assignment type expression conjunction 
-	    equality equop relation relop addition addop term mulop factor
-	    unaryop primary fuint fustring reint restring
+%type<node> file statement definition assignment type
+	    fuint fustring reint restring
+	    
+%type<i> expression conjunction equality relation
+	 addition term factor primary
+	 
+%type<s> equop relop addop mulop unaryop
 	    
 %start file
 
@@ -68,6 +72,9 @@ statement : LCURLY statement RCURLY
 	  | REPEAT LPAREN expression RPAREN LCURLY statement RCURLY
 	  | definition SEMICOL
 	  | expression SEMICOL
+	{
+		;
+	}
 	  | assignment SEMICOL
 	  | PAUSE reint SEMICOL
 	  | OUTSTRING restring SEMICOL
@@ -98,88 +105,234 @@ statement : LCURLY statement RCURLY
 	  ;
 	  
 definition : type ID
+	{
+		;
+	}
 	   | type assignment
+	{
+		;
+	}
 	   ;
 
-assignment : ID EQASS reint 
+assignment : ID EQASS reint
+	{
+		;
+	}
 	   | ID EQASS fuint
+	{
+		;
+	}
 	   | ID EQASS restring
+	{
+		;
+	}
 	   | ID EQASS fustring
+	{
+		;
+	}
 	   ;
 	   
 type : INT_T
+	{
+		;
+	}
      | STRING_T
+	{
+		;
+	}
      ;
      
 expression : conjunction
+	{
+		;
+	}
 	   | expression OR conjunction
+	{
+		;
+	}
 	   ;
 	   
 conjunction : equality 
+	{
+		;
+	}
 	    | conjunction AND equality
+	{
+		;
+	}
 	    ;
 	   
 equality : relation
+	{
+		;
+	}
 	 | relation equop relation
+	{
+		;
+	}
 	 ;
 	 
 equop : EQCOMP
+	{
+		;
+	}
       | NE
+	{
+		;
+	}
       ;
       
 relation : addition
+	{
+		;
+	}
 	 | addition relop addition
+	{
+		;
+	}
 	 ;
 	 
 relop : LT
+	{
+		;
+	}
       | LE
+	{
+		;
+	}
       | GT
+	{
+		;
+	}
       | GE
+	{
+		;
+	}
       ;
       
 addition : term
+	{
+		;
+	}
 	 | addition addop term
+	{
+		;
+	}
 	 ;
 	 
 addop : ADD
+	{
+		;
+	}
       | SUB
+	{
+		;
+	}
       ;
   
 term : factor
+	{
+		;
+	}
      | term mulop factor
+	{
+		;
+	}
      ;
       
 mulop : MUL
+	{
+		;
+	}
       | DIV
+	{
+		;
+	}
       | MOD
+	{
+		;
+	}
       ;
       
 factor : unaryop primary
-       | primary;
+	{
+		;
+	}
+       | primary
+	{
+		;
+	}
+       ;
        
 unaryop : SUB
-        | OPP;
+	{
+		;
+	}
+        | OPP
+	{
+		;
+	}
+        ;
         
 primary : ID
+	{
+		;
+	}
         | INT
+	{
+		;
+	}
         | LPAREN expression RPAREN
+	{
+		;
+	}
         ;
         
 fuint : INSTRING
+	{
+		;
+	}
       | MOUSEPOSX
+	{
+		;
+	}
       | MOUSEPOSY
+	{
+		;
+	}
       ;
       
 fustring : INSTRING
+	{
+		;
+	}
          ;
          
 reint : expression
+	{
+		;
+	}
        | ID
-       | INT_T
+	{
+		;
+	}
+	//{
+	//	$$ = vars[*$1];      delete $1;
+	//}
+       | INT
+	{
+		;
+	}
        ;
        
 restring : STRING 
+	{
+		;
+	}
 	 | ID
+	{
+		;
+	}
 	 ;
 
  /*
