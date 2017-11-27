@@ -1,6 +1,8 @@
 {
 
 	lclick;
-	a = 3;
-
+	int a = 3;
+	while (a > 2) {
+		rclick;
+	}
 }

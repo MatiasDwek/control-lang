@@ -9,7 +9,7 @@ enum class SymbolID
     // Terminals
     while_, lparen_, rparen_, lcurly_, rcurly_, if_, else_,
     repeat_, semicol_, pause_, outstring_, outint_, lclick_, rclick_,
-    lrelease_, rrlease_, up_, down_, left_, right_, presskey_, releasekey_,
+    lrelease_, rrelease_, up_, down_, left_, right_, presskey_, releasekey_,
     id_, eqass_, or_, and_, eqcomp_, ne_, lt_, le_, gt_, ge_, add_, sub_,
     mul_, div_, mod_, opp_, int_, inint_, mouseposx_, mouseposy_,
     instring_, string_, string_t_, int_t_,
@@ -38,6 +38,7 @@ public:
     SymbolID symbol_ID;
     SymbolType symbol_type;
     std::string value;
+    std::string getString();
 };
 
 #endif

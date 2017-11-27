@@ -2,4 +2,4 @@ lex control.l
 yacc -dtv control.y
 g++ -std=c++11 -c lex.yy.c
 g++ -std=c++11 -c y.tab.c
-g++ -std=c++11 treenode.cpp -o control y.tab.o lex.yy.o
+g++ -std=c++11 treenode.cpp printcode.cpp symbol.cpp -o control y.tab.o lex.yy.o
