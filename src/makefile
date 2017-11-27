@@ -1,15 +1,19 @@
 CC = g++ -std=c++11
 
-all: control
+all: lex.yy.c y.tab.c control control2
 
-control: lex.yy.c y.tab.c y.tab.o lex.yy.o
-	$(CC) -c lex.yy.c y.tab.c -o control y.tab.o lex.yy.o -lfl
-	
-y.tab.c: control.y
+control: 
+	$(CC) -c lex.yy.c y.tab.c 
+
+control2:
+	$(CC)  treenode.cpp printcode.cpp symbol.cpp -o control y.tab.o lex.yy.o
+
+y.tab.c: 
 	yacc -dtv control.y
 
-lex.yy.c: control.l
+lex.yy.c: 
 	lex control.l
 	
 clean:
-	rm -rf *~ control.c lex.yy.c control
+	rm -rf *~ lex.yy.o y.tab.o control
+
