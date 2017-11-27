@@ -36,49 +36,49 @@ std::string Symbol::getString()
 			 	 symbol_string = "else ";
 			 	 break; 
 			case SymbolID::repeat_:
-			 	 symbol_string = "repeat ";
+			 	 symbol_string = "for (int repeat = 0; repeat < ";
 			 	 break; 
 			case SymbolID::semicol_:
-			 	 symbol_string = "; ";
+			 	 symbol_string = ";\n";
 			 	 break; 
 			case SymbolID::pause_:
-			 	 symbol_string = "system(\"sleep\") ";
+			 	 symbol_string = "system(\"sleep ";
 			 	 break; 
 			case SymbolID::outstring_:
-			 	 symbol_string = "outstring_ "; 
+			 	 symbol_string = "std::cout << "; 
 			 	 break; 
 			case SymbolID::outint_:
-			 	 symbol_string = "outint_ "; 
+			 	 symbol_string = "std::cout << "; 
 			 	 break; 
 			case SymbolID::lclick_:
-			 	 symbol_string = "lclick_ "; 
+			 	 symbol_string = "system(\"xdotool mousedown 1 \")";
 			 	 break; 
 			case SymbolID::rclick_:
-			 	 symbol_string = "rclick_ "; 
+			 	 symbol_string = "system(\"xdotool mousedown 3 \")";
 			 	 break; 
 			case SymbolID::lrelease_:
-			 	 symbol_string = "lrelease_ "; 
+			 	 symbol_string = "system(\"xdotool mousedown 1 \")";
 			 	 break; 
 			case SymbolID::rrelease_:
-			 	 symbol_string = "rrelease_ "; 
+			 	 symbol_string = "system(\"xdotool mousedown 3 \")";
 			 	 break; 
 			case SymbolID::up_:
-			 	 symbol_string = "up_ "; 
+			 	 symbol_string = "system(\"xdotool mousemove_relative -- 0 ";
 			 	 break; 
 			case SymbolID::down_:
-			 	 symbol_string = "down_ "; 
+			 	 symbol_string = "system(\"xdotool mousemove_relative -- 0 -";
 			 	 break; 
 			case SymbolID::left_:
-			 	 symbol_string = "left_ "; 
+			 	 symbol_string = "system(\"xdotool mousemove_relative -- -";
 			 	 break; 
 			case SymbolID::right_:
-			 	 symbol_string = "right_ "; 
+			 	 symbol_string = "system(\"xdotool mousemove_relative -- ";
 			 	 break; 
 			case SymbolID::presskey_:
-			 	 symbol_string = "presskey_ "; 
+			 	 symbol_string = "system(\"xdotool keydown ";
 			 	 break; 
 			case SymbolID::releasekey_:
-			 	 symbol_string = "releasekey_ "; 
+			 	 symbol_string = "system(\"xdotool keyup ";
 			 	 break; 
 			case SymbolID::id_:
 			 	 symbol_string = this->value + " ";
@@ -132,16 +132,16 @@ std::string Symbol::getString()
 			 	 symbol_string = this->value + " ";
 			 	 break; 
 			case SymbolID::inint_:
-			 	 symbol_string = "inint_ "; 
+			 	 symbol_string = "(std::cin >> inint) ? inint:0";
 			 	 break; 
-			case SymbolID::mouseposx_:
-			 	 symbol_string = "mouseposx_ "; 
+			case SymbolID::mouseposx_: //
+			 	 symbol_string = " "; 
 			 	 break; 
-			case SymbolID::mouseposy_:
-			 	 symbol_string = "mouseposy_ "; 
+			case SymbolID::mouseposy_: //
+			 	 symbol_string = " "; 
 			 	 break; 
 			case SymbolID::instring_:
-			 	 symbol_string = "instring "; 
+			 	 symbol_string = "(std::cin >> instring) ? instring:\"\""; 
 			 	 break; 
 			case SymbolID::string_:
 			 	 symbol_string = this->value + " ";
@@ -151,7 +151,37 @@ std::string Symbol::getString()
 			 	 break; 
 			case SymbolID::int_t_:
 			 	 symbol_string = "int ";
-			 	 break; 
+			 	 break;
+			case SymbolID::post_repeat_:
+				symbol_string = "; repeat++) "; 
+				break; 
+			case SymbolID::post_pause_:
+				symbol_string = "\") "; 
+			 	break; 
+			case SymbolID::post_up_:
+				symbol_string = "\" )"; 
+			 	break; 
+			case SymbolID::post_down_:
+				symbol_string = "\" )"; 
+			 	break; 
+			case SymbolID::post_left_:
+				symbol_string = "0 \" )"; 
+			 	break; 
+			case SymbolID::post_right_:
+				symbol_string = "0 \" )"; 
+			 	break; 
+			case SymbolID::post_presskey_:
+				symbol_string = "\")"; 
+			 	break; 
+			case SymbolID::post_releasekey_:
+				symbol_string = "\")";
+			 	break;
+			case SymbolID::post_mouseposx_: //
+				symbol_string = " 0 \")";
+			 	break;
+			case SymbolID::post_mouseposy_: //
+				symbol_string = " \")";
+			 	break;
 	
 		}
 		return symbol_string;

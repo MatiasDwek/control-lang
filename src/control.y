@@ -184,11 +184,15 @@ statement : statement statement
 		Symbol repeat_s(SymbolID::repeat_, SymbolType::terminal_);
 		TreeNode repeat_n(repeat_s);
 		
-		Symbol lparen_s(SymbolID::lparen_, SymbolType::terminal_);
-		TreeNode lparen_n(lparen_s);
+		//Symbol lparen_s(SymbolID::lparen_, SymbolType::terminal_);
+		//TreeNode lparen_n(lparen_s);
 		
-		Symbol rparen_s(SymbolID::rparen_, SymbolType::terminal_);
-		TreeNode rparen_n(rparen_s);
+		//To be able to translate correctly
+		Symbol post_repeat_s(SymbolID::post_repeat_, SymbolType::terminal_);
+		TreeNode post_repeat_n(post_repeat_s);
+		
+		//Symbol rparen_s(SymbolID::rparen_, SymbolType::terminal_);
+		//TreeNode rparen_n(rparen_s);
 		
 		Symbol lcurly_s(SymbolID::lcurly_, SymbolType::terminal_);
 		TreeNode lcurly_n(lcurly_s);
@@ -197,9 +201,10 @@ statement : statement statement
 		TreeNode rcurly_n(rcurly_s);
 		
 		$$->addNode(repeat_n);
-		$$->addNode(lparen_n);
+		//$$->addNode(lparen_n);
 		$$->addNode(*$3);
-		$$->addNode(rparen_n);
+		$$->addNode(post_repeat_n);
+		//$$->addNode(rparen_n);
 		$$->addNode(lcurly_n);
 		$$->addNode(*$6);
 		$$->addNode(rcurly_n);
@@ -253,11 +258,16 @@ statement : statement statement
 		Symbol pause_s(SymbolID::pause_, SymbolType::terminal_);
 		TreeNode pause_n(pause_s);
 		
+		//To be able to translate correctly
+		Symbol post_pause_s(SymbolID::post_pause_, SymbolType::terminal_);
+		TreeNode post_pause_n(post_pause_s);
+		
 		Symbol semicol_s(SymbolID::semicol_, SymbolType::terminal_);		
 		TreeNode semicol_n(semicol_s);
 		
 		$$->addNode(pause_n);
 		$$->addNode(*$2);
+		$$->addNode(post_pause_n);
 		$$->addNode(semicol_n);
 		
 		delete $2;
@@ -360,11 +370,16 @@ statement : statement statement
 		Symbol up_s(SymbolID::up_, SymbolType::terminal_);
 		TreeNode up_n(up_s);
 		
+		//To be able to translate correctly
+		Symbol post_up_s(SymbolID::post_up_, SymbolType::terminal_);
+		TreeNode post_up_n(post_up_s);
+		
 		Symbol semicol_s(SymbolID::semicol_, SymbolType::terminal_);		
 		TreeNode semicol_n(semicol_s);
 		
 		$$->addNode(up_n);
 		$$->addNode(*$2);
+		$$->addNode(post_up_n);
 		$$->addNode(semicol_n);
 		
 		delete $2;
@@ -377,11 +392,16 @@ statement : statement statement
 		Symbol down_s(SymbolID::down_, SymbolType::terminal_);
 		TreeNode down_n(down_s);
 		
+		//To be able to translate correctly
+		Symbol post_down_s(SymbolID::post_down_, SymbolType::terminal_);
+		TreeNode post_down_n(post_down_s);
+		
 		Symbol semicol_s(SymbolID::semicol_, SymbolType::terminal_);		
 		TreeNode semicol_n(semicol_s);
 		
 		$$->addNode(down_n);
 		$$->addNode(*$2);
+		$$->addNode(post_down_n);
 		$$->addNode(semicol_n);
 		
 		delete $2;
@@ -394,11 +414,16 @@ statement : statement statement
 		Symbol left_s(SymbolID::left_, SymbolType::terminal_);
 		TreeNode left_n(left_s);
 		
+		//To be able to translate correctly
+		Symbol post_left_s(SymbolID::post_left_, SymbolType::terminal_);
+		TreeNode post_left_n(post_left_s);
+		
 		Symbol semicol_s(SymbolID::semicol_, SymbolType::terminal_);		
 		TreeNode semicol_n(semicol_s);
 		
 		$$->addNode(left_n);
 		$$->addNode(*$2);
+		$$->addNode(post_left_n);
 		$$->addNode(semicol_n);
 		
 		delete $2;
@@ -411,11 +436,16 @@ statement : statement statement
 		Symbol right_s(SymbolID::right_, SymbolType::terminal_);
 		TreeNode right_n(right_s);
 		
+		//To be able to translate correctly
+		Symbol post_right_s(SymbolID::post_right_, SymbolType::terminal_);
+		TreeNode post_right_n(post_right_s);
+		
 		Symbol semicol_s(SymbolID::semicol_, SymbolType::terminal_);		
 		TreeNode semicol_n(semicol_s);
 		
 		$$->addNode(right_n);
 		$$->addNode(*$2);
+		$$->addNode(post_right_n);
 		$$->addNode(semicol_n);
 		
 		delete $2;
@@ -428,11 +458,16 @@ statement : statement statement
 		Symbol presskey_s(SymbolID::presskey_, SymbolType::terminal_);
 		TreeNode presskey_n(presskey_s);
 		
+		//To be able to translate correctly
+		Symbol post_presskey_s(SymbolID::post_presskey_, SymbolType::terminal_);
+		TreeNode post_presskey_n(post_presskey_s);
+		
 		Symbol semicol_s(SymbolID::semicol_, SymbolType::terminal_);		
 		TreeNode semicol_n(semicol_s);
 		
 		$$->addNode(presskey_n);
 		$$->addNode(*$2);
+		$$->addNode(post_presskey_n);
 		$$->addNode(semicol_n);
 		
 		delete $2;
@@ -445,11 +480,16 @@ statement : statement statement
 		Symbol releasekey_s(SymbolID::releasekey_, SymbolType::terminal_);
 		TreeNode releasekey_n(releasekey_s);
 		
+		//To be able to translate correctly
+		Symbol post_releasekey_s(SymbolID::post_releasekey_, SymbolType::terminal_);
+		TreeNode post_releasekey_n(post_releasekey_s);
+		
 		Symbol semicol_s(SymbolID::semicol_, SymbolType::terminal_);		
 		TreeNode semicol_n(semicol_s);
 		
 		$$->addNode(releasekey_n);
 		$$->addNode(*$2);
+		$$->addNode(post_releasekey_n);
 		$$->addNode(semicol_n);
 		
 		delete $2;
@@ -932,7 +972,12 @@ fuint : ININT
 		Symbol mouseposx_s(SymbolID::mouseposx_, SymbolType::terminal_);
 		TreeNode mouseposx_n(mouseposx_s);
 		
+		//To be able to translate correctly
+		Symbol post_mouseposx_s(SymbolID::post_mouseposx_, SymbolType::terminal_);
+		TreeNode post_mouseposx_n(post_mouseposx_s);
+		
 		$$->addNode(mouseposx_n);
+		$$->addNode(post_mouseposx_n);
 	}
       | MOUSEPOSY
 	{
@@ -942,7 +987,12 @@ fuint : ININT
 		Symbol mouseposy_s(SymbolID::mouseposy_, SymbolType::terminal_);
 		TreeNode mouseposy_n(mouseposy_s);
 		
+		//To be able to translate correctly
+		Symbol post_mouseposy_s(SymbolID::post_mouseposy_, SymbolType::terminal_);
+		TreeNode post_mouseposy_n(post_mouseposy_s);
+		
 		$$->addNode(mouseposy_n);
+		$$->addNode(post_mouseposy_n);
 	}
       ;
       
@@ -1016,5 +1066,7 @@ int main()
   	std::cout << '\n';
   	
   	print_code(terminals_vector, std::string("intermediate_code.cpp"));
+  	
+  	system("g++ -std=c++11 intermediate_code.cpp -o a.out");
   	
 }

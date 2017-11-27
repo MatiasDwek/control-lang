@@ -17,7 +17,11 @@ enum class SymbolID
     // Non terminals
     file_, statement_, definition_, assignment_,
     type_, expression_, conjunction_, equality_, equop_, relation_, relop_, addition_,
-    addop_, term_, mulop_, factor_, unaryop_, primary_, fuint_, fustring_, reint_, restring_
+    addop_, term_, mulop_, factor_, unaryop_, primary_, fuint_, fustring_, reint_, restring_,
+    
+    // Additional for translation
+    post_repeat_, post_pause_, post_up_, post_down_, post_left_, post_right_, post_presskey_,
+    post_releasekey_, post_mouseposx_, post_mouseposy_
 };
 
 enum class SymbolType
