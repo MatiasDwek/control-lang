@@ -16,7 +16,6 @@ public:
     std::vector<Symbol> DFSPreOrder();
     void DFSPreOrder(std::vector<Symbol>& terminals_vector);
     Symbol getSymbol();
-    //void TreeNode::deleteTree();
 };
 
 #endif

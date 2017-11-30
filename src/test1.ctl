@@ -1,8 +1,6 @@
-int sleepTime = 500000;
-int squareSize = 50;
 int i = 0;
 
-while(i) {
-	outstring "hola";
+while(i<5) {
+	outstring "hola\n";
 	i = i + 1;
 }

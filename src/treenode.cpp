@@ -46,13 +46,3 @@ Symbol TreeNode::getSymbol()
 {
     return this->symbol;
 }
-
-/*void TreeNode::deleteTree() {
-	for (std::vector<TreeNode>::iterator it = this->subtrees.begin() ; it != this->subtrees.end(); it++)
-	{
-		if (it->getSymbol().symbol_type == SymbolType::terminal_)
-			delete *it;
-		else
-			it->deleteTree();
-	}
-}*/

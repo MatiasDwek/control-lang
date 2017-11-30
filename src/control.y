@@ -12,9 +12,14 @@
 extern int yylex();
 extern FILE *yyin;
 
+static TreeNode *root;
+
 inline void yyerror(const char *s)
 {
 	std::cout << s << std::endl;
+	
+	delete root;
+	
 	exit(0);
 }
 
@@ -23,7 +28,7 @@ static std::map<std::string, VariableType> vars_types;
 
 
 
-static TreeNode *root;
+
 %}
  
 %union{int i; std::string *s; TreeNode *node;}
@@ -65,6 +70,8 @@ statement : statement statement
 		
 		$$->addNode(*$1);
 		$$->addNode(*$2);
+		
+		delete $1, $2;
 	}
 	  | LCURLY statement RCURLY
 	{
@@ -80,6 +87,8 @@ statement : statement statement
 		$$->addNode(lcurly_n);
 		$$->addNode(*$2);
 		$$->addNode(rcurly_n);
+		
+		delete $2;
 	} 
 	  | WHILE LPAREN expression RPAREN LCURLY statement RCURLY
 	{
@@ -1085,5 +1094,7 @@ int main(int argc, char *argv[])
   	
   	system("g++ -std=c++11 intermediate_code.cpp -o a.out");
   	system("rm intermediate_code.cpp");
+  	
+  	delete root;
   	
 }
