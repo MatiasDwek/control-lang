@@ -16,6 +16,7 @@ void print_code(std::vector<Symbol>& terminals_vector, std::string filename)
 		inter_file << "#include <iostream>" << std::endl;
 		inter_file << "#include <string>" << std::endl;
 		inter_file << "#include <cstdlib>" << std::endl;
+		inter_file << "#include <unistd.h>" << std::endl;
 		
 		inter_file << std::endl << "int main() {" << std::endl;
 		

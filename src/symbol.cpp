@@ -1,4 +1,5 @@
 #include <string>
+#include <sstream>
 
 #include "symbol.hpp"
 
@@ -12,6 +13,7 @@ std::string Symbol::getString()
 	else
 	{
 		std::string symbol_string;
+		std::ostringstream oss;
 		switch (this->symbol_ID)
 		{
 			case SymbolID::while_:
@@ -42,7 +44,7 @@ std::string Symbol::getString()
 			 	 symbol_string = ";\n";
 			 	 break; 
 			case SymbolID::pause_:
-			 	 symbol_string = "system(\"sleep ";
+			 	 symbol_string = "usleep( ";
 			 	 break; 
 			case SymbolID::outstring_:
 			 	 symbol_string = "std::cout << "; 
@@ -63,22 +65,22 @@ std::string Symbol::getString()
 			 	 symbol_string = "system(\"xdotool mousedown 3 \")";
 			 	 break; 
 			case SymbolID::up_:
-			 	 symbol_string = "system(\"xdotool mousemove_relative -- 0 ";
+				symbol_string = "instring = \"xdotool mousemove_relative -- 0 -\" + std::to_string(";
 			 	 break; 
 			case SymbolID::down_:
-			 	 symbol_string = "system(\"xdotool mousemove_relative -- 0 -";
+				symbol_string = "instring = \"xdotool mousemove_relative -- 0 \" + std::to_string(";
 			 	 break; 
 			case SymbolID::left_:
-			 	 symbol_string = "system(\"xdotool mousemove_relative -- -";
+			 	 symbol_string = "instring = \"xdotool mousemove_relative -- -\" + std::to_string(";
 			 	 break; 
 			case SymbolID::right_:
-			 	 symbol_string = "system(\"xdotool mousemove_relative -- ";
+			 	 symbol_string = "instring = \"xdotool mousemove_relative -- \" + std::to_string(";
 			 	 break; 
 			case SymbolID::presskey_:
-			 	 symbol_string = "system(\"xdotool keydown ";
+				 symbol_string = "instring = \"xdotool keydown \" + ";
 			 	 break; 
 			case SymbolID::releasekey_:
-			 	 symbol_string = "system(\"xdotool keyup ";
+				 symbol_string = "instring = \"xdotool keyup \" + ";
 			 	 break; 
 			case SymbolID::id_:
 			 	 symbol_string = this->value + " ";
@@ -135,7 +137,7 @@ std::string Symbol::getString()
 			 	 symbol_string = "(std::cin >> inint) ? inint:0";
 			 	 break; 
 			case SymbolID::mouseposx_: //
-			 	 symbol_string = " "; 
+			 	 symbol_string = " ";
 			 	 break; 
 			case SymbolID::mouseposy_: //
 			 	 symbol_string = " "; 
@@ -156,25 +158,25 @@ std::string Symbol::getString()
 				symbol_string = "; repeat++) "; 
 				break; 
 			case SymbolID::post_pause_:
-				symbol_string = "\") "; 
+				symbol_string = ") "; 
 			 	break; 
 			case SymbolID::post_up_:
-				symbol_string = "\" )"; 
+				symbol_string = "); system(instring.c_str());"; 
 			 	break; 
 			case SymbolID::post_down_:
-				symbol_string = "\" )"; 
+				symbol_string = "); system(instring.c_str());"; 
 			 	break; 
 			case SymbolID::post_left_:
-				symbol_string = "0 \" )"; 
+				symbol_string = ") + \" 0\"; system(instring.c_str());"; 
 			 	break; 
 			case SymbolID::post_right_:
-				symbol_string = "0 \" )"; 
+				symbol_string = ") + \" 0\"; system(instring.c_str());"; 
 			 	break; 
 			case SymbolID::post_presskey_:
-				symbol_string = "\")"; 
+				symbol_string = "; system(instring.c_str());"; 
 			 	break; 
 			case SymbolID::post_releasekey_:
-				symbol_string = "\")";
+				symbol_string = "; system(instring.c_str());";
 			 	break;
 			case SymbolID::post_mouseposx_: //
 				symbol_string = " 0 \")";

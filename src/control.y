@@ -10,10 +10,12 @@
 #include "printcode.hpp"
 
 extern int yylex();
+extern FILE *yyin;
 
 inline void yyerror(const char *s)
 {
 	std::cout << s << std::endl;
+	exit(0);
 }
 
 static std::map<std::string, std::string> vars;
@@ -1052,18 +1054,33 @@ restring : STRING
 extern int yylex();
 extern int yyparse();
 
-int main()
+int main(int argc, char *argv[])
 {
+	if (argc == 2)
+	{
+		yyin = fopen(argv[1], "r+");
+		if (yyin == NULL)
+		{
+ 			printf("%s couldn't be openend or wasn't found.\n", argv[1]);
+			return -1;
+		}
+	}
+	else
+	{
+		std::cout << "Error: expected 1 argument." << std::endl;
+		return -1;
+	}
+
 	yyparse();
 	
 	std::vector<Symbol> terminals_vector;
 	terminals_vector = root->DFSPreOrder();
 	
-	std::cout << "Parsed tree terminals:" << std::endl;
+	//std::cout << "Parsed tree terminals:" << std::endl;
 	
-  	for (std::vector<Symbol>::iterator it = terminals_vector.begin() ; it != terminals_vector.end(); it++)
-    		std::cout << ' ' << (int) it->symbol_ID;
-  	std::cout << '\n';
+  	//for (std::vector<Symbol>::iterator it = terminals_vector.begin() ; it != terminals_vector.end(); it++)
+    	//	std::cout << ' ' << (int) it->symbol_ID;
+  	//std::cout << '\n';
   	
   	print_code(terminals_vector, std::string("intermediate_code.cpp"));
   	
