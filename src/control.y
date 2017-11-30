@@ -1067,7 +1067,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		std::cout << "Error: expected 1 argument." << std::endl;
+		std::cout << "Error: expected 1 argument (the file to compile)." << std::endl;
 		return -1;
 	}
 
@@ -1077,7 +1077,6 @@ int main(int argc, char *argv[])
 	terminals_vector = root->DFSPreOrder();
 	
 	//std::cout << "Parsed tree terminals:" << std::endl;
-	
   	//for (std::vector<Symbol>::iterator it = terminals_vector.begin() ; it != terminals_vector.end(); it++)
     	//	std::cout << ' ' << (int) it->symbol_ID;
   	//std::cout << '\n';
@@ -1085,5 +1084,6 @@ int main(int argc, char *argv[])
   	print_code(terminals_vector, std::string("intermediate_code.cpp"));
   	
   	system("g++ -std=c++11 intermediate_code.cpp -o a.out");
+  	system("rm intermediate_code.cpp");
   	
 }

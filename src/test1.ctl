@@ -4,5 +4,5 @@ int i = 0;
 
 while(i) {
 	outstring "hola";
-	i = i + 1;sca
+	i = i + 1;
 }
