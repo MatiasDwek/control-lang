@@ -15,4 +15,4 @@ lex.yy.c: control.l
 	lex control.l
 	
 clean:
-	rm -rf *~ lex.yy.o y.tab.o control
+	rm -rf *~ lex.yy.o y.tab.o control lex.yy.c y.output y.tab.c y.tab.h

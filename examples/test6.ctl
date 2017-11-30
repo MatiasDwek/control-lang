@@ -1,3 +1,5 @@
+# Assisted movement and click
+
 int movement;
 int length;
 int click;

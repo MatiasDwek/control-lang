@@ -10,7 +10,7 @@ Este proyecto consiste en el lenguaje de programación **control** para manejar 
 
 
 + Compilar el proyecto a partir del comando `make`
-+ Ejecutar el programa con el comando `./control`
++ Ejecutar el programa con el comando `./control <nombre del archivo a compilar>`
 + Si se desean eliminar los archivos creados, utilizar la instrucción `make clean`
 
 

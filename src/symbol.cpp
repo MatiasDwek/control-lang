@@ -136,10 +136,10 @@ std::string Symbol::getString()
 			case SymbolID::inint_:
 			 	 symbol_string = "(std::cin >> inint) ? inint:0";
 			 	 break; 
-			case SymbolID::mouseposx_: //
+			case SymbolID::mouseposx_: //TODO
 			 	 symbol_string = " ";
 			 	 break; 
-			case SymbolID::mouseposy_: //
+			case SymbolID::mouseposy_: //TODO
 			 	 symbol_string = " "; 
 			 	 break; 
 			case SymbolID::instring_:
@@ -178,11 +178,11 @@ std::string Symbol::getString()
 			case SymbolID::post_releasekey_:
 				symbol_string = "; system(instring.c_str());";
 			 	break;
-			case SymbolID::post_mouseposx_: //
-				symbol_string = " 0 \")";
+			case SymbolID::post_mouseposx_: //TODO
+				symbol_string = " ";
 			 	break;
-			case SymbolID::post_mouseposy_: //
-				symbol_string = " \")";
+			case SymbolID::post_mouseposy_: //TODO
+				symbol_string = " ";
 			 	break;
 	
 		}
